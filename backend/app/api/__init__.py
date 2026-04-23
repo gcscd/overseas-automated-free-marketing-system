@@ -1,7 +1,7 @@
 """
 API 路由__init__.py
 """
-from app.api import auth, projects, roles, tasks, stats, system
+from app.api import auth, projects, roles, tasks, stats, system, proxies
 
 __all__ = [
     "auth",
@@ -10,4 +10,5 @@ __all__ = [
     "tasks",
     "stats",
     "system",
+    "proxies",
 ]

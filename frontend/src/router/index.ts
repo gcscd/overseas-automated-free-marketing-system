@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Layout from '@/views/Layout.vue'
 
 const routes = [
   { 
@@ -10,50 +11,68 @@ const routes = [
   { 
     path: '/dashboard', 
     name: 'Dashboard', 
-    component: () => import('@/views/Dashboard.vue'),
-    meta: { title: '数据看板', requiresAuth: true }
+    component: Layout,
+    meta: { title: '数据看板', requiresAuth: true },
+    children: [
+      { path: '', component: () => import('@/views/Dashboard.vue') }
+    ]
   },
   { 
     path: '/projects', 
     name: 'Projects', 
-    component: () => import('@/views/ProjectList.vue'),
-    meta: { title: '项目管理', requiresAuth: true }
-  },
-  { 
-    path: '/projects/create', 
-    name: 'CreateProject', 
-    component: () => import('@/views/ProjectCreate.vue'),
-    meta: { title: '创建项目', requiresAuth: true }
-  },
-  { 
-    path: '/projects/:id', 
-    name: 'ProjectDetail', 
-    component: () => import('@/views/ProjectDetail.vue'),
-    meta: { title: '项目详情', requiresAuth: true }
+    component: Layout,
+    meta: { title: '项目管理', requiresAuth: true },
+    children: [
+      { path: '', component: () => import('@/views/ProjectList.vue') },
+      { path: 'create', component: () => import('@/views/ProjectCreate.vue') },
+      { path: ':id', component: () => import('@/views/ProjectDetail.vue') }
+    ]
   },
   { 
     path: '/roles', 
     name: 'Roles', 
-    component: () => import('@/views/RoleList.vue'),
-    meta: { title: 'AI 角色', requiresAuth: true }
+    component: Layout,
+    meta: { title: 'AI 角色', requiresAuth: true },
+    children: [
+      { path: '', component: () => import('@/views/RoleList.vue') },
+      { path: ':id', component: () => import('@/views/RoleDetail.vue') }
+    ]
   },
   { 
     path: '/tasks', 
     name: 'Tasks', 
-    component: () => import('@/views/TaskList.vue'),
-    meta: { title: '任务监控', requiresAuth: true }
+    component: Layout,
+    meta: { title: '任务监控', requiresAuth: true },
+    children: [
+      { path: '', component: () => import('@/views/TaskList.vue') }
+    ]
   },
   { 
     path: '/channels', 
     name: 'Channels', 
-    component: () => import('@/views/ChannelList.vue'),
-    meta: { title: '渠道管理', requiresAuth: true }
+    component: Layout,
+    meta: { title: '渠道管理', requiresAuth: true },
+    children: [
+      { path: '', component: () => import('@/views/ChannelList.vue') }
+    ]
+  },
+  { 
+    path: '/proxies', 
+    name: 'Proxies', 
+    component: Layout,
+    meta: { title: '代理管理', requiresAuth: true },
+    children: [
+      { path: '', component: () => import('@/views/ProxyList.vue') }
+    ]
   },
   { 
     path: '/settings', 
     name: 'Settings', 
-    component: () => import('@/views/Settings.vue'),
-    meta: { title: '系统设置', requiresAuth: true }
+    component: Layout,
+    meta: { title: '系统设置', requiresAuth: true },
+    children: [
+      { path: '', component: () => import('@/views/Settings.vue') }
+    ]
   }
 ]
 
