@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hermes-frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - hermes-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hermes-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/data:/app/data
+      - ./backend/logs:/app/logs
+      - ./backend/config:/app/config
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./data/hermes.db
+      - HERMES_AGENT_CONFIG=/app/config/agent.yaml
+    restart: always
+    networks:
+      - hermes-network
+
+networks:
+  hermes-network:
+    driver: bridge

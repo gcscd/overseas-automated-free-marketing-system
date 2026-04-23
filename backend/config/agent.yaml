@@ -1,0 +1,105 @@
+# Hermes Agent Configuration
+
+agent:
+  name: "Hermes Marketing Agent"
+  version: "1.0.0"
+  max_concurrent_tasks: 10
+  default_max_retry: 2
+  task_timeout_minutes: 30
+
+memory:
+  type: "sqlite"
+  path: "./data/agent_memory.db"
+  max_history_per_project: 100
+
+scheduler:
+  type: "apscheduler"
+  timezone: "UTC"
+  check_interval_seconds: 10
+
+ai:
+  provider: "anthropic"
+  default_model: "claude-3-5-sonnet"
+  max_tokens: 4096
+  temperature: 0.7
+  timeout_seconds: 120
+  
+roles:
+  # 管理与策略类
+  - role_code: "PROJECT_MANAGER"
+    name: "项目经理"
+    priority: 1
+  - role_code: "STRATEGY_DIRECTOR"
+    name: "策略总监"
+    priority: 1
+  - role_code: "RESOURCE_COORDINATOR"
+    name: "资源协调员"
+    priority: 2
+    
+  # 市场与调研类
+  - role_code: "MARKET_ANALYST"
+    name: "市场分析师"
+    priority: 2
+  - role_code: "COMPETITIVE_ANALYST"
+    name: "竞品分析师"
+    priority: 2
+  - role_code: "KEYWORD_SPECIALIST"
+    name: "关键词专家"
+    priority: 2
+  - role_code: "USER_RESEARCHER"
+    name: "用户研究员"
+    priority: 2
+    
+  # 内容与创意类
+  - role_code: "COPYWRITER"
+    name: "文案撰稿人"
+    priority: 3
+  - role_code: "CONTENT_STRATEGIST"
+    name: "内容策略师"
+    priority: 3
+  - role_code: "VIDEO_SCRIPT_WRITER"
+    name: "视频脚本师"
+    priority: 3
+  - role_code: "VISUAL_DESIGNER"
+    name: "视觉设计师"
+    priority: 3
+  - role_code: "SEO_CONTENT_SPECIALIST"
+    name: "SEO 内容专家"
+    priority: 3
+  - role_code: "LOCALIZATION_SPECIALIST"
+    name: "本地化专家"
+    priority: 3
+    
+  # 渠道与分发类
+  - role_code: "SOCIAL_MEDIA_MANAGER"
+    name: "社交媒体运营"
+    priority: 4
+  - role_code: "SHORT_VIDEO_MANAGER"
+    name: "短视频渠道运营"
+    priority: 4
+  - role_code: "SEO_CHANNEL_SPECIALIST"
+    name: "SEO 渠道专家"
+    priority: 4
+  - role_code: "CONTENT_DISTRIBUTION"
+    name: "内容分发专家"
+    priority: 4
+  - role_code: "COMMUNITY_MANAGER"
+    name: "社群运营专家"
+    priority: 4
+    
+  # 数据与分析类
+  - role_code: "DATA_ANALYST"
+    name: "数据分析师"
+    priority: 5
+  - role_code: "ROI_OPTIMIZATION"
+    name: "ROI 优化专家"
+    priority: 5
+  - role_code: "GROWTH_HACKER"
+    name: "增长黑客"
+    priority: 5
+
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {module}:{function}:{line} | {message}"
+  rotation: "10 MB"
+  retention: "90 days"
